@@ -1,6 +1,8 @@
 #ifndef VEC3_H
 #define VEC3_H
 
+#include <iostream>
+
 class Vec3{
 public:
 	Vec3();
@@ -15,7 +17,7 @@ public:
 	Vec3 operator+=(const Vec3& v);
 	Vec3 operator*=(const Vec3& v);
 	Vec3 operator/=(const Vec3& v);
-	double length();
+	const double length();
 
 private:
 	double m_x;
@@ -35,6 +37,7 @@ inline Vec3 operator-(Vec3& u, Vec3& v);
 inline Vec3 operator*(Vec3& u, Vec3& v);
 inline Vec3 operator*(double t, Vec3& v);
 inline Vec3 operator*(Vec3& v, double t);
+inline Vec3 operator/(Vec3& v, double t);
 inline double dot(Vec3& u, Vec3& v);
 inline Vec3 cross(Vec3& u, Vec3& v);
 inline Vec3 unit_vector(Vec3& v);

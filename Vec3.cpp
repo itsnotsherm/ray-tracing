@@ -32,7 +32,7 @@ Vec3 Vec3::operator/=(const Vec3& v) {
 const double Vec3::length() {
 	return std::sqrt((x() * x()
 		+ y() * y()
-		+ z() * z());
+		+ z() * z()));
 }
 
 inline std::ostream& operator<<(std::ostream& out, Vec3& v) {
@@ -64,7 +64,11 @@ inline Vec3 operator*(double t, Vec3& v) {
 		t * v.z());
 }
 inline Vec3 operator*(Vec3& v, double t) {
-	return operator*(t, v);
+	return t * v;
+}
+
+inline Vec3 operator/(Vec3& v, double t) {
+	return (1 / t) * v;
 }
 
 inline double dot(Vec3& u, Vec3& v) {
