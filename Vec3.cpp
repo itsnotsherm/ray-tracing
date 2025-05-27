@@ -35,54 +35,54 @@ const double Vec3::length() {
 		+ z() * z()));
 }
 
-inline std::ostream& operator<<(std::ostream& out, Vec3& v) {
+std::ostream& operator<<(std::ostream& out, Vec3& v) {
 	out << v.x() << " " << v.y() << " " << v.z();
 	return out;
 }
 
-inline Vec3 operator+(Vec3& u, Vec3& v) {
+Vec3 operator+(Vec3& u, Vec3& v) {
 	return Vec3(u.x() + v.x(),
 		u.y() + v.y(),
 		u.z() + v.z());
 }
 
-inline Vec3 operator-(Vec3& u, Vec3& v) {
+Vec3 operator-(Vec3& u, Vec3& v) {
 	return Vec3(u.x() - v.x(),
 		u.y() - v.y(),
 		u.z() - v.z());
 }
 
-inline Vec3 operator*(Vec3& u, Vec3& v) {
+Vec3 operator*(Vec3& u, Vec3& v) {
 	return Vec3(u.x() * v.x(),
 		u.y() * v.y(),
 		u.z() * v.z());
 }
 
-inline Vec3 operator*(double t, Vec3& v) {
+Vec3 operator*(double t, Vec3& v) {
 	return Vec3(t * v.x(),
 		t * v.y(),
 		t * v.z());
 }
-inline Vec3 operator*(Vec3& v, double t) {
+Vec3 operator*(Vec3& v, double t) {
 	return t * v;
 }
 
-inline Vec3 operator/(Vec3& v, double t) {
+Vec3 operator/(Vec3& v, double t) {
 	return (1 / t) * v;
 }
 
-inline double dot(Vec3& u, Vec3& v) {
+double dot(Vec3& u, Vec3& v) {
 	return (u.x() * v.x()
 		+ u.y() * v.y()
 		+ u.z() * v.z());
 }
 
-inline Vec3 cross(Vec3& u, Vec3& v) {
+Vec3 cross(Vec3& u, Vec3& v) {
 	return Vec3(u.y() * v.z() - u.z() * v.y(),
 		u.z() * v.x() - u.x() * v.z(),
 		u.x() * v.y() - u.y() * v.x());
 }
 
-inline Vec3 unit_vector(Vec3& v) {
+Vec3 unit_vector(Vec3& v) {
 	return v / v.length();
 }
