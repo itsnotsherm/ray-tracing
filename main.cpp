@@ -25,7 +25,7 @@ int main() {
     image_height = (image_height < 1) ? 1 : image_height;
 
     // Camera
-    auto camera_center = point3(0, 0, 0);
+    auto camera_center = Point3(0, 0, 0);
     auto focal_length = 1.0;
     auto viewport_height = 2.0;
     auto viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);

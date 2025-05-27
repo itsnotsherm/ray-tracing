@@ -7,21 +7,21 @@ class ray {
 public:
 	ray() = default;
 
-	ray(const point3& origin, const Vec3& direction)
+	ray(const Point3& origin, const Vec3& direction)
 		: m_origin{ origin }, m_direction{ direction }
 	{
 	}
 
-	const point3& origin() const { return m_origin; }
+	const Point3& origin() const { return m_origin; }
 	const Vec3& direction() const { return m_direction; }
 
 	// P(t) = A + tB, where P is a 3D position along a line in 3D
-	point3 at(double t) const {
+	Point3 at(double t) const {
 		return m_origin + t * m_direction;
 	}
 
 private:
-	point3 m_origin{};
+	Point3 m_origin{};
 	Vec3 m_direction{};
 };
 

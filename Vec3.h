@@ -26,8 +26,8 @@ private:
 
 };
 
-// point3 is an alias for Vec3, useful for geometric clarity in code
-using point3 = Vec3;
+// Point3 is an alias for Vec3, useful for geometric clarity in code
+using Point3 = Vec3;
 
 // Vector Utility functions
 
