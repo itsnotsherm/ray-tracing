@@ -17,7 +17,7 @@ public:
 	Vec3 operator+=(const Vec3& v);
 	Vec3 operator*=(const Vec3& v);
 	Vec3 operator/=(const Vec3& v);
-	const double length();
+	const double length() const;
 
 private:
 	double m_x;
@@ -31,15 +31,15 @@ using point3 = Vec3;
 
 // Vector Utility functions
 
-inline std::ostream& operator<<(std::ostream& out, Vec3& v);
-inline Vec3 operator+(Vec3& u, Vec3& v);
-inline Vec3 operator-(Vec3& u, Vec3& v);
-inline Vec3 operator*(Vec3& u, Vec3& v);
-inline Vec3 operator*(double t, Vec3& v);
-inline Vec3 operator*(Vec3& v, double t);
-inline Vec3 operator/(Vec3& v, double t);
-inline double dot(Vec3& u, Vec3& v);
-inline Vec3 cross(Vec3& u, Vec3& v);
-inline Vec3 unit_vector(Vec3& v);
+std::ostream& operator<<(std::ostream& out, const Vec3& v);
+Vec3 operator+(const Vec3& u, const Vec3& v);
+Vec3 operator-(const Vec3& u, const Vec3& v);
+Vec3 operator*(const Vec3& u, const Vec3& v);
+Vec3 operator*(double t, const Vec3& v);
+Vec3 operator*(const Vec3& v, double t);
+Vec3 operator/(const Vec3& v, double t);
+double dot(const Vec3& u, const Vec3& v);
+Vec3 cross(const Vec3& u, const Vec3& v);
+Vec3 unit_vector(const Vec3& v);
 
 #endif // !VEC3_H
