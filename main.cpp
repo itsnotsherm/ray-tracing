@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-bool hit_sphere(const Point3& center, double radius, const ray& r) {
+double hit_sphere(const Point3& center, double radius, const ray& r) {
     Vec3 oc = center - r.origin(); // origin (of ray) to center
     Vec3 d = r.direction();
     
@@ -13,15 +13,27 @@ bool hit_sphere(const Point3& center, double radius, const ray& r) {
     auto b = -2 * dot(d, oc);
     auto c = dot(oc, oc) - radius * radius;
     auto discriminant = b * b - 4 * a * c;
-    return (discriminant >= 0);
+
+    if (discriminant < 0) {
+        return -1.0;
+    }
+    else {
+        return (-b - std::sqrt(discriminant)) / (2.0 * a); // assume smallest t
+    }
 }
 
 // Currently implements a simple color gradient background
 color ray_color(const ray& r) {
-    // Hardcoded a red sphere on z = -1 with radius 0.5
-    if (hit_sphere(Point3(0, 0, -1), 0.5, r)) {
-        return color(1, 0, 0);
+    // Hardcoded a sphere on z = -1 with radius 0.5
+    const Point3 c = Point3(0, 0, -1);
+    const double radius = 0.5;
+
+    auto t = hit_sphere(c, radius, r);
+    if (t > 0) {
+        Vec3 N = unit_vector(r.at(t) - c); // surface normal vector at the point where ray hits sphere
+        return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);  // map each component from [-1, 1] to [0, 1]
     }
+
 
     Vec3 unit_direction = unit_vector(r.direction()); // normalizes ray direction for interpolation
     auto a = 0.5 * (unit_direction.y() + 1.0); // map Y of normalized vector from [-1, 1] to [0, 1]
