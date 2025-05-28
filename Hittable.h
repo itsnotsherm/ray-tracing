@@ -2,6 +2,7 @@
 #define HITTABLE_H
 
 #include "Ray.h"
+#include "HitRecord.h"
 
 class Hittable {
 public:
