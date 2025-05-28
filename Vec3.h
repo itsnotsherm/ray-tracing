@@ -21,9 +21,9 @@ public:
 	const double length_squared() const;
 
 private:
-	double m_x;
-	double m_y;
-	double m_z;
+	double m_x{};
+	double m_y{};
+	double m_z{};
 
 };
 
