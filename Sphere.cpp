@@ -29,9 +29,11 @@ bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const
         if (!isWithinRange(root, t_min, t_max)) return false;
     }
 
-    rec.p = r.at(root);
-    rec.normal = (rec.p - center()) / radius();
-    rec.t = root;
+    rec.set_t(root);
+    rec.set_p(r.at(rec.t());
+    
+    Vec3 outward_normal = (rec.p() - center()) / radius();
+    rec.set_face_normal(r, outward_normal);
 
     return true;
 }
