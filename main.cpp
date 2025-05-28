@@ -4,8 +4,25 @@
 
 #include <iostream>
 
-// Currently implements a simple color gradient
+bool hit_sphere(const Point3& center, double radius, const ray& r) {
+    Vec3 oc = center - r.origin(); // origin (of ray) to center
+    Vec3 d = r.direction();
+    
+    // coefficients of quadratic formula
+    auto a = dot(d, d);
+    auto b = -2 * dot(d, oc);
+    auto c = dot(oc, oc) - radius * radius;
+    auto discriminant = b * b - 4 * a * c;
+    return (discriminant >= 0);
+}
+
+// Currently implements a simple color gradient background
 color ray_color(const ray& r) {
+    // Hardcoded a red sphere on z = -1 with radius 0.5
+    if (hit_sphere(Point3(0, 0, -1), 0.5, r)) {
+        return color(1, 0, 0);
+    }
+
     Vec3 unit_direction = unit_vector(r.direction()); // normalizes ray direction for interpolation
     auto a = 0.5 * (unit_direction.y() + 1.0); // map Y of normalized vector from [-1, 1] to [0, 1]
 
