@@ -30,9 +30,13 @@ Vec3 Vec3::operator/=(const Vec3& v) {
 }
 
 const double Vec3::length() const {
-	return std::sqrt((x() * x()
+	return std::sqrt(length_squared());
+}
+
+const double Vec3::length_squared() const {
+	return x() * x()
 		+ y() * y()
-		+ z() * z()));
+		+ z() * z();
 }
 
 std::ostream& operator<<(std::ostream& out, const Vec3& v) {

@@ -18,6 +18,7 @@ public:
 	Vec3 operator*=(const Vec3& v);
 	Vec3 operator/=(const Vec3& v);
 	const double length() const;
+	const double length_squared() const;
 
 private:
 	double m_x;
