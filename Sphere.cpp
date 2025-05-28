@@ -5,14 +5,14 @@ Sphere::Sphere(const Point3& center, double radius)
 {
 }
 
-bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const override {
+bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const {
     Vec3 oc = center() - r.origin(); // origin (of ray) to center
     Vec3 d = r.direction();
 
     // coefficients of quadratic formula
     auto a = dot(d, d);
     auto b = -2 * dot(d, oc);
-    auto c = dot(oc, oc) - radius * radius;
+    auto c = dot(oc, oc) - radius() * radius();
     auto discriminant = b * b - 4 * a * c;
 
     if (discriminant < 0) {
@@ -30,7 +30,7 @@ bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const
     }
 
     rec.set_t(root);
-    rec.set_p(r.at(rec.t());
+    rec.set_p(r.at(rec.t()));
     
     Vec3 outward_normal = (rec.p() - center()) / radius();
     rec.set_face_normal(r, outward_normal);

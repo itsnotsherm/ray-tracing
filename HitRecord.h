@@ -1,12 +1,14 @@
 #ifndef HITRECORD_H
 #define HITRECORD_H
 
+#include "Ray.h"
+#include "Vec3.h"
+
 class HitRecord {
 public:
-
-	Point3& p() const { return m_p; }
-	Vec3& normal() const { return m_normal; }
-	double t() const { return t; }
+	const Point3& p() const { return m_p; }
+	const Vec3& normal() const { return m_normal; }
+	double t() const { return m_t; }
 
 	void set_p(const Point3& p);
 	void set_t(const double t);

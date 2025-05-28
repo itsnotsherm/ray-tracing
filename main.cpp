@@ -1,39 +1,14 @@
-#include "Color.h"
-#include "Ray.h"
-#include "Vec3.h"
+#include "Utils.h"
 
-#include <iostream>
-
-double hit_sphere(const Point3& center, double radius, const Ray& r) {
-    Vec3 oc = center - r.origin(); // origin (of ray) to center
-    Vec3 d = r.direction();
-    
-    // coefficients of quadratic formula
-    auto a = dot(d, d);
-    auto b = -2 * dot(d, oc);
-    auto c = dot(oc, oc) - radius * radius;
-    auto discriminant = b * b - 4 * a * c;
-
-    if (discriminant < 0) {
-        return -1.0;
-    }
-    else {
-        return (-b - std::sqrt(discriminant)) / (2.0 * a); // assume smallest t
-    }
-}
+#include "HittableList.h"
+#include "Sphere.h"
 
 // Currently implements a simple color gradient background
-Color ray_color(const Ray& r) {
-    // Hardcoded a sphere on z = -1 with radius 0.5
-    const Point3 c = Point3(0, 0, -1);
-    const double radius = 0.5;
-
-    auto t = hit_sphere(c, radius, r);
-    if (t > 0) {
-        Vec3 N = unit_vector(r.at(t) - c); // surface normal vector at the point where ray hits sphere
-        return 0.5 * Color(N.x() + 1, N.y() + 1, N.z() + 1);  // map each component from [-1, 1] to [0, 1]
+Color ray_color(const Ray& r, const Hittable& world) {
+    HitRecord rec;
+    if (world.hit(r, 0, infinity, rec)) {
+        return 0.5 * (rec.normal() + Color(1, 1, 1)); // map each component from [-1, 1] to [0, 1]
     }
-
 
     Vec3 unit_direction = unit_vector(r.direction()); // normalizes ray direction for interpolation
     auto a = 0.5 * (unit_direction.y() + 1.0); // map Y of normalized vector from [-1, 1] to [0, 1]
@@ -52,6 +27,11 @@ int main() {
     // Ensure image height is at least 1 after calculation
     int image_height = static_cast<double>(image_width) / aspect_ratio;
     image_height = (image_height < 1) ? 1 : image_height;
+
+    // World
+    HittableList world{};
+    world.add(std::make_shared<Sphere>( Point3(0, 0, -1), 0.5 )); // sphere
+    world.add(std::make_shared<Sphere>( Point3(0, -100.5, -1), 100 )); // ground
 
     // Camera
     auto camera_center = Point3(0, 0, 0);
@@ -83,7 +63,7 @@ int main() {
             auto ray_direction = pixel_center - camera_center;
             Ray r{ camera_center, ray_direction };
 
-            auto pixel_color = ray_color(r);
+            auto pixel_color = ray_color(r, world);
             write_color(std::cout, pixel_color);
         }
     }
