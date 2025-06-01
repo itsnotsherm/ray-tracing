@@ -10,7 +10,7 @@ public:
 	const Point3& center() const { return m_center; }
 	double radius() const { return m_radius; }
 
-	bool hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const override;
+	bool hit(const Ray& r, Interval ray_t, HitRecord& rec) const override;
 
 private:
 	Point3 m_center{};

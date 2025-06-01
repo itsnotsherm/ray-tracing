@@ -13,7 +13,7 @@ public:
 	void add(std::shared_ptr<Hittable> object);
 	void clear();
 
-	bool hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const override;
+	bool hit(const Ray& r, Interval ray_t, HitRecord& rec) const override;
 
 private:
 	std::vector<std::shared_ptr<Hittable>> m_objects;

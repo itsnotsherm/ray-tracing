@@ -6,7 +6,7 @@
 // Currently implements a simple color gradient background
 Color ray_color(const Ray& r, const Hittable& world) {
     HitRecord rec;
-    if (world.hit(r, 0, infinity, rec)) {
+    if (world.hit(r, Interval(0, infinity), rec)) {
         return 0.5 * (rec.normal() + Color(1, 1, 1)); // map each component from [-1, 1] to [0, 1]
     }
 
